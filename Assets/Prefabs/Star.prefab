@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7137175082159573247}
   - component: {fileID: 7567167549006875493}
   - component: {fileID: 62920349773080515}
+  - component: {fileID: 3574637557983603662}
   m_Layer: 0
   m_Name: Star
   m_TagString: Star
@@ -114,3 +115,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd66dfc5c11918c4f830370a4fcb0472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  constellation: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  isVisible: 0
+--- !u!95 &3574637557983603662
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137175082159573244}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8d5fe038d5a7e264284a32ca5d3f6859, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -347,6 +347,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player4
       objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_TagString
+      value: Player4
+      objectReference: {fileID: 0}
     - target: {fileID: 4315513786978293410, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
       propertyPath: playerName
       value: Player4
@@ -489,6 +497,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 917088497477797564}
     m_Modifications:
     - target: {fileID: 62920349773080515, guid: eab660e89fcfad34eaeaf278d8fe708f, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1241105434}
+    - target: {fileID: 62920349773080515, guid: eab660e89fcfad34eaeaf278d8fe708f, type: 3}
       propertyPath: constellation
       value: 
       objectReference: {fileID: 917088497477797563}
@@ -568,6 +580,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player3
       objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_TagString
+      value: Player3
+      objectReference: {fileID: 0}
     - target: {fileID: 4315513786978293410, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
       propertyPath: playerName
       value: Player3
@@ -630,6 +650,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+--- !u!95 &1241105434 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3574637557983603662, guid: eab660e89fcfad34eaeaf278d8fe708f, type: 3}
+  m_PrefabInstance: {fileID: 728712661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1246382618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1029,6 +1054,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4315513786978293408, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
+      propertyPath: m_TagString
+      value: Player2
+      objectReference: {fileID: 0}
     - target: {fileID: 4315513786978293410, guid: d6e5d56a0a7967e49bbf70d3c7929610, type: 3}
       propertyPath: playerName
       value: Player2
@@ -1101,6 +1134,14 @@ PrefabInstance:
     - target: {fileID: 1338063557981679396, guid: 103c23e66d15f864d9ab69c1524661b8, type: 3}
       propertyPath: m_Name
       value: Constellation1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787866174232555534, guid: 103c23e66d15f864d9ab69c1524661b8, type: 3}
+      propertyPath: playerName
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4787866174232555534, guid: 103c23e66d15f864d9ab69c1524661b8, type: 3}
+      propertyPath: playerButton
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4787866174232555534, guid: 103c23e66d15f864d9ab69c1524661b8, type: 3}
       propertyPath: stars.Array.size

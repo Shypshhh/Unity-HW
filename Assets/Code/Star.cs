@@ -5,35 +5,48 @@ using UnityEngine;
 public class Star : MonoBehaviour
 {
     public Constellation constellation;
+    SpriteRenderer spriteRenderer;
     public bool isVisible;
+    Animator animator;
 
     void Start()
     {
-    
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = false;
     }
 
     void Update()
     {
         if (isVisible)
         {
-            
+            if (Input.GetKeyDown(constellation.playerButton))
+            {
+                constellation.DetectStar();
+
+                // Run activation animation here
+                animator.SetTrigger("isActivated");
+
+                enabled = false;
+            }
         } 
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ENTERED");
-        if (collision.gameObject.CompareTag("Player1"))
+        if (collision.gameObject.CompareTag(constellation.playerName))
         {
-            Debug.Log("ENTERED");
+            isVisible = true;
+            spriteRenderer.enabled = true;
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player1"))
+        if (collision.gameObject.CompareTag(constellation.playerName))
         {
-            Debug.Log("Left");
+            isVisible = false;
+            spriteRenderer.enabled = false;
         }
     }
 }
