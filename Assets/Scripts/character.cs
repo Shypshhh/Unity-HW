@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class character : MonoBehaviour
 {
+    float timeBeforeStun = 0.0f;
+    float timeInStun = 0.0f;
+    bool isStunned;
+
     float minX;
     float minY;
     float maxX;
@@ -12,6 +16,10 @@ public class character : MonoBehaviour
     public int numberOfConsts;
     public string playerName;
     public float moveSpeed = 20f;
+    public KeyCode playerButton;
+
+    public float maxTimeBeforeStun = 2.0f;
+    public float maxStunTime = 2.0f;
 
     private void Start()
     {
@@ -26,6 +34,24 @@ public class character : MonoBehaviour
 
     void Update()
     {
+        if (isStunned)
+        {
+            if (timeBeforeStun >= maxTimeBeforeStun)
+            {
+                timeInStun += Time.deltaTime;
+                if (timeInStun >= maxStunTime)
+                {
+                    timeInStun = 0.0f;
+                    timeBeforeStun = 0.0f;
+                    isStunned = false;
+                }
+
+                return;
+            }
+
+            timeBeforeStun += Time.deltaTime;
+        }
+
         transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), Input.GetAxis(playerName + "Vertical"), 0f)
         * Time.deltaTime
         * moveSpeed;
@@ -39,12 +65,14 @@ public class character : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Warp"))
         {
-            Destroy(collision.gameObject);
+            isStunned = true;
+
+            FreezeWarp warp = collision.gameObject.GetComponent<FreezeWarp>();
+            warp.RemoveInSeconds(maxTimeBeforeStun);
         }
 
-        if (collision.gameObject.CompareTag("Star"))
-        {
-            Debug.Log("ENTERED STAR");
-        }
+        //if (collision.gameObject.CompareTag("Star"))
+        //{
+        //}
     }
 }

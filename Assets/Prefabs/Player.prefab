@@ -51,6 +51,9 @@ MonoBehaviour:
   numberOfConsts: 0
   playerName: Player1
   moveSpeed: 20
+  playerButton: 0
+  maxTimeBeforeStun: 1
+  maxStunTime: 2
 --- !u!212 &4315513786978293411
 SpriteRenderer:
   m_ObjectHideFlags: 0
