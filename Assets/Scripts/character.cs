@@ -63,16 +63,12 @@ public class character : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Warp"))
-        {
-            isStunned = true;
-
-            FreezeWarp warp = collision.gameObject.GetComponent<FreezeWarp>();
-            warp.RemoveInSeconds(maxTimeBeforeStun);
-        }
-
-        //if (collision.gameObject.CompareTag("Star"))
+        //if (collision.gameObject.CompareTag("Warp"))
         //{
+        //    isStunned = true;
+
+        //    FreezeWarp warp = collision.gameObject.GetComponent<FreezeWarp>();
+        //    warp.RemoveInSeconds(maxTimeBeforeStun);
         //}
     }
 }

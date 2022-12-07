@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class Constellation : MonoBehaviour
 {
-    public List<Star> stars;
     public string playerName;
     public KeyCode playerButton;
 
+    Star[] stars;
     int starsInConstellation;
     int startsActive = 0;
 
     void Start()
     {
-        starsInConstellation = stars.Count;
-    }
-
-    void Update()
-    {
-       
+        stars = GetComponentsInChildren<Star>();
+        starsInConstellation = stars.Length;
+        foreach (var star in stars)
+        {
+            // Move constellation stars to the player's layer
+            star.spriteRenderer.sortingLayerName = playerName;
+        }
     }
 
     public void DetectStar()
@@ -29,16 +30,4 @@ public class Constellation : MonoBehaviour
             // Constellation completion logic
         }
     }
-
-    //private void OnDrawGizmosSelected()
-    //{
-    //    foreach (var star in stars)
-    //    {
-    //        foreach (var connectedStar in star.connectedStars)
-    //        {
-    //            Gizmos.color = Color.yellow;
-    //            Gizmos.DrawLine(star.transform.position, connectedStar.transform.position);
-    //        }
-    //    }
-    //}
 }

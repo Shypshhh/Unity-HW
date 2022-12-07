@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class Star : MonoBehaviour
 {
+    [HideInInspector] public SpriteRenderer spriteRenderer;
     public Constellation constellation;
     public List<Line> lines;
-    //public List<Star> connectedStars;
-    SpriteRenderer spriteRenderer;
-    public bool isVisible;
+    bool isVisible;
     Animator animator;
 
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
     }
 
     void Update()
@@ -30,6 +28,8 @@ public class Star : MonoBehaviour
                 animator.SetTrigger("isActivated");
                 foreach (var line in lines)
                 {
+                    // Move line to the player's layer
+                    line.spriteRenderer.sortingLayerName = spriteRenderer.sortingLayerName;
                     line.Display();
                 }
 
@@ -43,7 +43,6 @@ public class Star : MonoBehaviour
         if (collision.gameObject.CompareTag(constellation.playerName))
         {
             isVisible = true;
-            spriteRenderer.enabled = true;
         }
     }
 
@@ -52,7 +51,6 @@ public class Star : MonoBehaviour
         if (collision.gameObject.CompareTag(constellation.playerName))
         {
             isVisible = false;
-            spriteRenderer.enabled = false;
         }
     }
 }
