@@ -5,6 +5,8 @@ using UnityEngine;
 public class Star : MonoBehaviour
 {
     public Constellation constellation;
+    public List<Line> lines;
+    //public List<Star> connectedStars;
     SpriteRenderer spriteRenderer;
     public bool isVisible;
     Animator animator;
@@ -26,6 +28,10 @@ public class Star : MonoBehaviour
 
                 // Run activation animation here
                 animator.SetTrigger("isActivated");
+                foreach (var line in lines)
+                {
+                    line.Display();
+                }
 
                 enabled = false;
             }

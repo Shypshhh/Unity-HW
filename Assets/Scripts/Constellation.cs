@@ -29,4 +29,16 @@ public class Constellation : MonoBehaviour
             // Constellation completion logic
         }
     }
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    foreach (var star in stars)
+    //    {
+    //        foreach (var connectedStar in star.connectedStars)
+    //        {
+    //            Gizmos.color = Color.yellow;
+    //            Gizmos.DrawLine(star.transform.position, connectedStar.transform.position);
+    //        }
+    //    }
+    //}
 }
