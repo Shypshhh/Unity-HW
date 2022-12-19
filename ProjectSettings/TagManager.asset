@@ -48,6 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
+  - name: Player1
     uniqueID: 867970725
+    locked: 0
+  - name: Player2
+    uniqueID: 2945323337
+    locked: 0
+  - name: Player3
+    uniqueID: 2351668779
+    locked: 0
+  - name: Player4
+    uniqueID: 3424225003
     locked: 0
