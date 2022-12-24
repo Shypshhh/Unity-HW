@@ -6,11 +6,15 @@ public class GameControl : MonoBehaviour
 {
     float warpTimer = 0f;
     List<int> createdConstellationsIndexes = new List<int>();
+    character[] players;
     public GameObject warpPrefab;
     public GameObject[] constellations;
+    public float maxStunTime = 2.0f;
 
     void Start()
     {
+        players = FindObjectsOfType<character>();
+
         CreateNewConstellationForPlayer("Player1", KeyCode.Space);
         CreateNewConstellationForPlayer("Player2", KeyCode.Escape);
     }
@@ -18,15 +22,15 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //warpTimer += 1f * Time.deltaTime;
-        //if (warpTimer >= Random.Range(10f, 20f))
-        //{
-        //    GameObject newWarp = Instantiate(warpPrefab);
-        //    float randomX = Random.Range(-10f, 10f);
-        //    float randomY = Random.Range(-10f, 10f);
-        //    newWarp.transform.position = new Vector3(randomX, randomY, 0f);
-        //    warpTimer = 0f;
-        //}
+        warpTimer += 1f * Time.deltaTime;
+        if (warpTimer >= Random.Range(10f, 20f))
+        {
+            GameObject newWarp = Instantiate(warpPrefab);
+            float randomX = Random.Range(-10f, 10f);
+            float randomY = Random.Range(-10f, 10f);
+            newWarp.transform.position = new Vector3(randomX, randomY, 0f);
+            warpTimer = 0f;
+        }
     }
     
     public void CreateNewConstellationForPlayer(string playerName, KeyCode playerButton)
@@ -60,5 +64,16 @@ public class GameControl : MonoBehaviour
     {
         CreateNewConstellationForPlayer(playerName, playerButton);
         createdConstellationsIndexes.Remove(constellationIndex);
+    }
+
+    public void FreezeOtherPlayers(string playerName)
+    {
+        foreach (var player in players)
+        {
+            if (player.playerName != playerName)
+            {
+                player.Stun(maxStunTime);
+            }
+        }
     }
 }
