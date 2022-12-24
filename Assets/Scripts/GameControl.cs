@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     float warpTimer = 0f;
+    List<int> createdConstellationsIndexes = new List<int>();
     public GameObject warpPrefab;
     public GameObject[] constellations;
 
@@ -30,13 +31,34 @@ public class GameControl : MonoBehaviour
     
     public void CreateNewConstellationForPlayer(string playerName, KeyCode playerButton)
     {
-        // Get new random constellation by index and create it
-        int constellationIndex = Random.Range(0, constellations.Length);
-        GameObject newConstellationGameobject = Instantiate(constellations[constellationIndex]);
+        // Get new random constellation by index
+        int constellationIndex;
+
+        // Continue generate random indxe, until there is constellation not created with this index
+        do
+        {
+            constellationIndex = Random.Range(0, constellations.Length);
+        }
+        while (createdConstellationsIndexes.Contains(constellationIndex));
+
+        GameObject constellationToCreate = constellations[constellationIndex];
+
+        // Create constellation
+        GameObject newConstellationGameobject = Instantiate(constellationToCreate);
 
         // Configure new constellation
         Constellation constellation = newConstellationGameobject.GetComponent<Constellation>();
         constellation.playerName = playerName;
         constellation.playerButton = playerButton;
+        constellation.gameControl = this;
+        constellation.constellationIndex = constellationIndex;
+
+        createdConstellationsIndexes.Add(constellationIndex);
+    }
+
+    public void CompleteConstellation(int constellationIndex, string playerName, KeyCode playerButton)
+    {
+        CreateNewConstellationForPlayer(playerName, playerButton);
+        createdConstellationsIndexes.Remove(constellationIndex);
     }
 }

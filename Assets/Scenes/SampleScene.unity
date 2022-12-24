@@ -240,6 +240,7 @@ MonoBehaviour:
   constellations:
   - {fileID: 1338063557981679396, guid: 103c23e66d15f864d9ab69c1524661b8, type: 3}
   - {fileID: 1212457650442499385, guid: 995f8d9a4a7dbec4593132cb4762d1d9, type: 3}
+  - {fileID: 1338063557981679396, guid: d3e7f51c8df3a8e4d9aab09aa52bb8ef, type: 3}
 --- !u!4 &296444286
 Transform:
   m_ObjectHideFlags: 0
