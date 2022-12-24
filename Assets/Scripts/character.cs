@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class character : MonoBehaviour
 {
-    float timeBeforeStun = 0.0f;
     float timeInStun = 0.0f;
     bool isStunned;
 
@@ -12,17 +11,18 @@ public class character : MonoBehaviour
     float minY;
     float maxX;
     float maxY;
+    GameControl gameControl;
 
     public int numberOfConsts;
     public string playerName;
     public float moveSpeed = 20f;
     public KeyCode playerButton;
 
-    public float maxTimeBeforeStun = 2.0f;
     public float maxStunTime = 2.0f;
 
     private void Start()
     {
+        gameControl = FindObjectOfType<GameControl>();
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
 
@@ -36,39 +36,35 @@ public class character : MonoBehaviour
     {
         if (isStunned)
         {
-            if (timeBeforeStun >= maxTimeBeforeStun)
+            timeInStun += Time.deltaTime;
+            if (timeInStun >= maxStunTime)
             {
-                timeInStun += Time.deltaTime;
-                if (timeInStun >= maxStunTime)
-                {
-                    timeInStun = 0.0f;
-                    timeBeforeStun = 0.0f;
-                    isStunned = false;
-                }
-
-                return;
+                timeInStun = 0.0f;
+                isStunned = false;
             }
 
-            timeBeforeStun += Time.deltaTime;
+            return;
         }
 
         transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), Input.GetAxis(playerName + "Vertical"), 0f)
         * Time.deltaTime
         * moveSpeed;
 
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX),
-                                       Mathf.Clamp(transform.position.y, minY, maxY),
-                                       0f);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, minX, maxX), Mathf.Clamp(transform.position.y, minY, maxY), 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void Stun(float seconds)
     {
-        //if (collision.gameObject.CompareTag("Warp"))
-        //{
-        //    isStunned = true;
+        isStunned = true;
+        maxStunTime = seconds;
+    }
 
-        //    FreezeWarp warp = collision.gameObject.GetComponent<FreezeWarp>();
-        //    warp.RemoveInSeconds(maxTimeBeforeStun);
-        //}
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Warp"))
+        {
+            gameControl.FreezeOtherPlayers(playerName);
+            Destroy(collision.gameObject);
+        }
     }
 }
