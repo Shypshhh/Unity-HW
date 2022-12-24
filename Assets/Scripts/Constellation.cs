@@ -6,6 +6,8 @@ public class Constellation : MonoBehaviour
 {
     public string playerName;
     public KeyCode playerButton;
+    [HideInInspector] public int constellationIndex;
+    [HideInInspector] public GameControl gameControl;
 
     Star[] stars;
     int starsInConstellation;
@@ -27,7 +29,8 @@ public class Constellation : MonoBehaviour
         startsActive++;
         if (startsActive >= starsInConstellation)
         {
-            // Constellation completion logic
+            gameControl.CompleteConstellation(constellationIndex, playerName, playerButton);
+            Destroy(gameObject);
         }
     }
 }
