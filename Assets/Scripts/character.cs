@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class character : MonoBehaviour
 {
@@ -14,14 +15,20 @@ public class character : MonoBehaviour
     GameControl gameControl;
 
     public int numberOfConsts;
+    public TextMeshProUGUI ConstText;
     public string playerName;
     public float moveSpeed = 20f;
     public KeyCode playerButton;
 
     public float maxStunTime = 2.0f;
 
+    
+
+
     private void Start()
     {
+        
+
         gameControl = FindObjectOfType<GameControl>();
         Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
         Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
@@ -42,9 +49,11 @@ public class character : MonoBehaviour
                 timeInStun = 0.0f;
                 isStunned = false;
             }
-
+        
             return;
         }
+
+        ConstText.text = ("Contellations Collected: ") + numberOfConsts.ToString("0");
 
         transform.position += new Vector3(Input.GetAxis(playerName + "Horizontal"), Input.GetAxis(playerName + "Vertical"), 0f)
         * Time.deltaTime
@@ -59,6 +68,7 @@ public class character : MonoBehaviour
         maxStunTime = seconds;
     }
 
+    
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Warp"))
@@ -67,4 +77,6 @@ public class character : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+    
 }

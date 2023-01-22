@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameControl : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameControl : MonoBehaviour
     public GameObject warpPrefab;
     public GameObject[] constellations;
     public float maxStunTime = 2.0f;
+    public float numberOfConsts;
+    
 
     void Start()
     {
@@ -30,6 +33,7 @@ public class GameControl : MonoBehaviour
             float randomY = Random.Range(-10f, 10f);
             newWarp.transform.position = new Vector3(randomX, randomY, 0f);
             warpTimer = 0f;
+
         }
     }
     
@@ -64,7 +68,19 @@ public class GameControl : MonoBehaviour
     {
         CreateNewConstellationForPlayer(playerName, playerButton);
         createdConstellationsIndexes.Remove(constellationIndex);
+         foreach (var player in players)
+        {
+            if (player.playerName == playerName)
+            {
+                player.numberOfConsts++;
+                player.ConstText.text = ("Contellations Collected: ") + numberOfConsts.ToString("0");
+                break;
+            }
+        }
+        
     }
+
+
 
     public void FreezeOtherPlayers(string playerName)
     {
