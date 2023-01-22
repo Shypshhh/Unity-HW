@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class OverUi : MonoBehaviour
 {
+    [SerializeField] private GameObject[] gameObjectsToDisable;
+
     public GameObject OverMenu;
 
     private void OnEnable()
@@ -17,19 +19,22 @@ public class OverUi : MonoBehaviour
         Timer.OnTimerZero -= EnableOverMenu;
     }
 
-     public void EnableOverMenu()
+    public void EnableOverMenu()
     {
         OverMenu.SetActive(true);
+        foreach (var item in gameObjectsToDisable)
+        {
+            item.SetActive(false);
+        }
     }
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMenu()
     {
         SceneManager.LoadScene(0);
     }
-    
 }
