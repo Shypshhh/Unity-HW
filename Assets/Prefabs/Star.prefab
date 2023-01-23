@@ -115,8 +115,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd66dfc5c11918c4f830370a4fcb0472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   constellation: {fileID: 0}
-  isVisible: 0
+  lines: []
 --- !u!95 &3574637557983603662
 Animator:
   serializedVersion: 4
