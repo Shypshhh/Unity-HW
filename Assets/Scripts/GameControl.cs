@@ -5,51 +5,52 @@ using TMPro;
 
 public class GameControl : MonoBehaviour
 {
-    float warpTimer = 0f;
-    List<int> createdConstellationsIndexes = new List<int>();
-    character[] players;
-    public GameObject warpPrefab;
-    public GameObject[] constellations;
-    public float maxStunTime = 2.0f;
-    public float numberOfConsts;
+    [SerializeField] private GameObject warpPrefab;
+    [SerializeField] private GameObject[] constellations;
+    [SerializeField] private float maxStunTime = 2.0f;
+    private Player[] _players;
+    private float _warpTimer;
+
+    private List<int> _createdConstellationsIndexes = new List<int>();
+
     private const float horizontalOffset = 8f;
     private const float verticalOffset = 6f;
-    float minX;
-    float minY;
-    float maxX;
-    float maxY;
+    private float _minX;
+    private float _minY;
+    private float _maxX;
+    private float _maxY;
 
-    void Start()
+    private void Start()
     {
-        players = FindObjectsOfType<character>();
+        _players = FindObjectsOfType<Player>();
 
-        Vector3 bottomLeft = Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 0f));
-        Vector3 topRight = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 0f));
+        var bottomLeft = Camera.main.ViewportToWorldPoint(Vector2.zero);
+        var topRight = Camera.main.ViewportToWorldPoint(Vector2.one);
 
-        minX = bottomLeft.x;
-        minY = bottomLeft.y;
-        maxX = topRight.x;
-        maxY = topRight.y;
+        _minX = bottomLeft.x;
+        _minY = bottomLeft.y;
+        _maxX = topRight.x;
+        _maxY = topRight.y;
 
-        CreateNewConstellationForPlayer("Player1", KeyCode.Space);
-        CreateNewConstellationForPlayer("Player2", KeyCode.Escape);
+        foreach (var player in _players)
+        {
+            CreateNewConstellationForPlayer(player.PlayerName, player.PlayerButton);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        warpTimer += 1f * Time.deltaTime;
-        if (warpTimer >= Random.Range(10f, 20f))
+        _warpTimer += Time.deltaTime;
+        if (_warpTimer >= Random.Range(10f, 20f))
         {
             GameObject newWarp = Instantiate(warpPrefab);
             float randomX = Random.Range(-10f, 10f);
             float randomY = Random.Range(-10f, 10f);
             newWarp.transform.position = new Vector3(randomX, randomY, 0f);
-            warpTimer = 0f;
-
+            _warpTimer = 0f;
         }
     }
-    
+
     public void CreateNewConstellationForPlayer(string playerName, KeyCode playerButton)
     {
         // Get new random constellation by index
@@ -60,49 +61,47 @@ public class GameControl : MonoBehaviour
         {
             constellationIndex = Random.Range(0, constellations.Length);
         }
-        while (createdConstellationsIndexes.Contains(constellationIndex));
+        while (_createdConstellationsIndexes.Contains(constellationIndex));
 
         GameObject constellationToCreate = constellations[constellationIndex];
 
         // Create constellation
         GameObject newConstellationGameobject = Instantiate(constellationToCreate);
-        float horizontalPosition = Random.Range(minX + horizontalOffset, maxX - horizontalOffset);
-        float verticalPosition = Random.Range(minY + verticalOffset, maxY - verticalOffset);
+        float horizontalPosition = Random.Range(_minX + horizontalOffset, _maxX - horizontalOffset);
+        float verticalPosition = Random.Range(_minY + verticalOffset, _maxY - verticalOffset);
 
         // Configure new constellation
         newConstellationGameobject.transform.position = new Vector3(horizontalPosition, verticalPosition, 0f);
         Constellation constellation = newConstellationGameobject.GetComponent<Constellation>();
         constellation.playerName = playerName;
         constellation.playerButton = playerButton;
-        constellation.gameControl = this;
-        constellation.constellationIndex = constellationIndex;
+        constellation.gameController = this;
+        constellation.ConstellationIndex = constellationIndex;
 
-        createdConstellationsIndexes.Add(constellationIndex);
+        _createdConstellationsIndexes.Add(constellationIndex);
     }
 
     public void CompleteConstellation(int constellationIndex, string playerName, KeyCode playerButton)
     {
         CreateNewConstellationForPlayer(playerName, playerButton);
-        createdConstellationsIndexes.Remove(constellationIndex);
-         foreach (var player in players)
+        _createdConstellationsIndexes.Remove(constellationIndex);
+        foreach (var player in _players)
         {
-            if (player.playerName == playerName)
+            if (player.PlayerName == playerName)
             {
-                player.numberOfConsts++;
-                player.ConstText.text = ("Contellations Collected: ") + numberOfConsts.ToString("0");
+                player.Score++;
                 break;
             }
         }
-        
     }
 
     public void FreezeOtherPlayers(string playerName)
     {
-        foreach (var player in players)
+        foreach (var player in _players)
         {
-            if (player.playerName != playerName)
+            if (player.PlayerName != playerName)
             {
-                player.Stun(maxStunTime);
+                player.Freeze(maxStunTime);
             }
         }
     }

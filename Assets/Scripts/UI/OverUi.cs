@@ -3,25 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class OverUi : MonoBehaviour
+public class OverUI : MonoBehaviour
 {
     [SerializeField] private GameObject[] gameObjectsToDisable;
-
-    public GameObject OverMenu;
+    [SerializeField] private GameObject gameOverMenu;
 
     private void OnEnable()
     {
-        Timer.OnTimerZero += EnableOverMenu;
+        Timer.OnTimerZero += ShowGameOverMenu;
     }
 
     private void OnDisable()
     {
-        Timer.OnTimerZero -= EnableOverMenu;
+        Timer.OnTimerZero -= ShowGameOverMenu;
     }
 
-    public void EnableOverMenu()
+    private void ShowGameOverMenu()
     {
-        OverMenu.SetActive(true);
+        gameOverMenu.SetActive(true);
         foreach (var item in gameObjectsToDisable)
         {
             item.SetActive(false);
@@ -35,6 +34,6 @@ public class OverUi : MonoBehaviour
 
     public void GoToMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

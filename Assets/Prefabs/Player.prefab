@@ -45,15 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4315513786978293408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a245537e8b14be4cbaa63d87c122a71, type: 3}
+  m_Script: {fileID: 11500000, guid: f9a616da90fb27c4981f38a8b562021d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfConsts: 0
   playerName: Player1
-  moveSpeed: 20
   playerButton: 0
-  maxTimeBeforeStun: 1
-  maxStunTime: 2
+  movementSpeed: 20
+  scoreText: {fileID: 0}
 --- !u!212 &4315513786978293411
 SpriteRenderer:
   m_ObjectHideFlags: 0

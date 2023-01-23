@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7508573063867568210}
   - component: {fileID: 5488656900772024168}
   - component: {fileID: 3814595233924364625}
-  - component: {fileID: 107906273117218641}
   m_Layer: 0
   m_Name: WarpFreeze
   m_TagString: Warp
@@ -102,15 +101,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.01
---- !u!114 &107906273117218641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2616915118288900640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e616bb114d6034089c0e6732dac5ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

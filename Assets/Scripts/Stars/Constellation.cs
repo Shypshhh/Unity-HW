@@ -1,13 +1,22 @@
-using Assets.Scripts.Stars;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Stars;
 using UnityEngine;
 
 public class Constellation : MonoBehaviour
 {
     private Star[] _stars;
     private int _undiscoveredStarsLeft;
+
+    [HideInInspector] public string playerName;
+    [HideInInspector] public KeyCode playerButton;
+    [HideInInspector] public GameControl gameController;
+
+    /// <summary>
+    /// Gets or sets the constellation index used to instantiate this one.
+    /// </summary>
+    public int ConstellationIndex { get; set; }
 
     private void Start()
     {
@@ -38,7 +47,7 @@ public class Constellation : MonoBehaviour
         if (_undiscoveredStarsLeft <= 0)
         {
             // Refactor
-            gameControl.CompleteConstellation(constellationIndex, playerName, playerButton);
+            gameController.CompleteConstellation(ConstellationIndex, playerName, playerButton);
             Destroy(gameObject);
         }
     }
@@ -50,10 +59,4 @@ public class Constellation : MonoBehaviour
             star.StarDiscovered -= CountStar;
         }
     }
-
-
-    [HideInInspector] public string playerName;
-    [HideInInspector] public KeyCode playerButton;
-    [HideInInspector] public int constellationIndex;
-    [HideInInspector] public GameControl gameControl;
 }

@@ -33,6 +33,12 @@ public class Star : MonoBehaviour
     /// </summary>
     public string PlayerName { get; set; }
 
+    protected virtual void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>().LogErrorIfNotAttached();
+        _animator = GetComponent<Animator>().LogErrorIfNotAttached();
+    }
+
     /// <summary>
     /// A method called when a player discovers a star.
     /// </summary>
@@ -41,12 +47,6 @@ public class Star : MonoBehaviour
         _animator.SetTrigger("Discovered");
         StarDiscovered?.Invoke(this, new StarEventArgs { Star = this });
         this.Disable();
-    }
-
-    protected virtual void Awake()
-    {
-        _spriteRenderer = GetComponent<SpriteRenderer>().LogErrorIfNotAttached();
-        _animator = GetComponent<Animator>().LogErrorIfNotAttached();
     }
 
     private void Update()
