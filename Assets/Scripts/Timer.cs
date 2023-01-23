@@ -20,11 +20,14 @@ public class Timer : MonoBehaviour
 
         if (currentTime <= timerLimit)
         {
+        
             currentTime = timerLimit;
             timerText.text = currentTime.ToString("0.00");
             timerText.color = Color.red;
             OnTimerZero?.Invoke();
             enabled = false;
+
+            
         }
 
         timerText.text = currentTime.ToString("0.00");   
